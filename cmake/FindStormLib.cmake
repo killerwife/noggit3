@@ -1,10 +1,12 @@
 # This file is part of Noggit3, licensed under GNU General Public License (version 3).
 
+set(STORM_INCLUDE_DIR $ENV{STORM_INCLUDE_DIR})
+set(STORM_LIBRARIES $ENV{STORM_LIBRARIES})
 find_path (STORM_INCLUDE_DIR StormLib.h StormPort.h)
 
-find_library (_storm_debug_lib NAMES StormLibDAD StormLibDAS StormLibDUD StormLibDUS)
-find_library (_storm_release_lib NAMES StormLibRAD StormLibRAS StormLibRUD StormLibRUS)
-find_library (_storm_any_lib NAMES storm stormlib StormLib)
+find_library (_storm_debug_lib NAMES StormLibDAD StormLibDAS StormLibDUD StormLibDUS PATHS "${STORM_LIBRARIES}")
+find_library (_storm_release_lib NAMES StormLibRAD StormLibRAS StormLibRUD StormLibRUS PATHS "${STORM_LIBRARIES}")
+find_library (_storm_any_lib NAMES storm stormlib StormLib PATHS "${STORM_LIBRARIES}")
 
 set (STORM_LIBRARIES)
 if (_storm_debug_lib AND _storm_release_lib)
